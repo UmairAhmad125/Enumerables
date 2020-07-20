@@ -1,6 +1,6 @@
-# rubocop:disable Metrics/BlockLength
 require_relative '../enumerables.rb'
 
+# rubocop:disable Metrics/BlockLength
 describe 'Enumerable' do
   let(:array) { [1, 2, 3, 4, 5] }
   let(:str_array) { %w[hi hello hey] }
