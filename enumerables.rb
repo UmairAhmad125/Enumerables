@@ -34,7 +34,6 @@ module Enumerable
     my_each do |friend|
       invited_list.push(friend) if yield(friend)
     end
-
     invited_list
   end
 
