@@ -6,12 +6,14 @@ describe 'Enumerable' do
   let(:str_array) { %w[hi hello hey] }
   let(:range) { 0..5 }
   let(:my_hash) { {} }
-  let(:select_proc ){ proc { |x| x > 2 } }
-  let(:my_all_proc1 ){ proc { |x| x > 2 } }
-  let(:my_all_proc2 ){ proc { |x| x.class == Integer } }
+  let(:select_proc) { proc { |x| x > 2 } }
+  let(:my_all_proc1) { proc { |x| x > 2 } }
+  let(:my_all_proc2) { proc { |x| x.class == Integer } }
   my_hash = { a: 1, b: 2, c: 3, d: 4, e: 5 }
   let(:index_proc) { proc { |e, i| puts e, i } }
-  # my_proc = proc{|x| x}
+  let(:inject_proc) { proc { |e| e } }
+  let(:map_proc) { proc { |x| x * x } }
+
   describe '#my_each' do
     count = 0
     it 'iterates through the block and yield' do
@@ -55,7 +57,7 @@ describe 'Enumerable' do
     end
   end
 
-  describe "#my_select" do
+  describe '#my_select' do
     it 'return enum if block is not given' do
       expect(array.my_select).to be_a Enumerable
     end
@@ -83,7 +85,7 @@ describe 'Enumerable' do
     end
 
     it 'should use block when provided with one' do
-      expect(array.my_all? &my_all_proc2).to eq(array.all? &my_all_proc2)
+      expect(array.my_all?(&my_all_proc2)).to eq(array.all?(&my_all_proc2))
     end
 
     it 'should accept and use a class argument and use it to test against self' do
@@ -109,7 +111,7 @@ describe 'Enumerable' do
     end
 
     it 'should use block when provided with one and use it to test against self' do
-      expect(array.my_any? &my_all_proc2).to eq(array.any? &my_all_proc2)
+      expect(array.my_any?(&my_all_proc2)).to eq(array.any?(&my_all_proc2))
     end
 
     it 'should accept and use a class argument and use it to test against self' do
@@ -135,7 +137,7 @@ describe 'Enumerable' do
     end
 
     it 'should use block when provided with one and use it to test against self' do
-      expect(array.my_none? &my_all_proc2).to eq(array.none? &my_all_proc2)
+      expect(array.my_none?(&my_all_proc2)).to eq(array.none?(&my_all_proc2))
     end
 
     it 'should accept and use a class argument and use it to test against self' do
@@ -150,6 +152,48 @@ describe 'Enumerable' do
       expect(str_array.my_none?('hi')).to eq(str_array.none?('hi'))
     end
   end
-  
+
+  describe '#my_inject' do
+    it 'should raise LocalJumpError if no block or argument is given' do
+      expect { array.my_inject }.to raise_error(LocalJumpError)
+    end
+
+    it 'returns and computes the function passing in block/proc for Range' do
+      expect(range.my_inject(&inject_proc)).to eq(range.inject(&inject_proc))
+    end
+
+    it 'returns and computes the function passing in block/proc for Array' do
+      expect(array.my_inject(&inject_proc)).to eq(array.inject(&inject_proc))
+    end
+
+    it 'returns the end result by computing the elements accoridng to first parameter' do
+      expect(array.my_inject(:+)).to eq(array.inject(:+))
+    end
+
+    it 'computes the opertion if second parameter is given (operator) and first is a variable' do
+      expect(array.my_inject(3, :*)).to eq(array.inject(3, :*))
+    end
+  end
+  describe '#my_count' do
+    it 'returns the number of element' do
+      expect(array.my_count).to eq(5)
+    end
+
+    it 'returns elements given in parameter' do
+      expect(range.my_count(&my_all_proc1)).to eq(3)
+    end
+  end
+  describe '#my_map' do
+    it 'return enum if block is not given' do
+      expect(array.my_map).to be_a Enumerable
+    end
+    it 'returns the elements after yield' do
+      expect(array.my_map(&map_proc)).to eq(array.map(&map_proc))
+    end
+
+    it 'returns elements in range by yielding' do
+      expect(range.my_map(&map_proc)).to eq(range.map(&map_proc))
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
