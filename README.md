@@ -1,5 +1,5 @@
-# Enumerables
-In this project we re-created some of the Ruby's enumerable methods like each, all, any, none, count, inject and map. 
+# Enumerables Testing (Rspec)
+In this project we tested our custom made Ruby enumerable methods like each, all, any, none, count, inject and map. 
 ## Built With
 
 - Ruby 2.7.1
@@ -24,8 +24,7 @@ Contributions, issues and feature requests are welcome! Start by:
 
 ## Live Demo
 
-- [Umair Ahmad Live Demo Link](https://repl.it/@UmairAhmad125/FrivolousMotionlessAbstracttype#main.rb)
-- [Haroon Abdulrazaq Live Demo Link](https://repl.it/@Haroon136/Enumerables)
+- [Live Demo Link](https://repl.it/@UmairAhmad125/FrivolousMotionlessAbstracttype#main.rb)
 
 ## Author
 
@@ -36,12 +35,12 @@ Contributions, issues and feature requests are welcome! Start by:
 - Twitter: [@umairahmadDP](https://twitter.com/umairahmadDP)
 - email: (umairahmad125@gmail.com)
 
-👤 **Haroon Abdulrazzaq**
+👤 **Adedeko Olawale**
 
-- Github: [@Haroonabdulrazaq](https://github.com/Haroonabdulrazaq)
-- Linkedin: https://www.linkedin.com/in/haroon-abdulrazaq-817906100/ 
-- Twitter: [@Hanq_o](https://twitter.com/Hanq_o)
-- email: (Haroonabdulrazaq@gmail.com)
+- Github: [@OlawaleJoseph](https://github.com/OlawaleJoseph) 
+- Twitter : [@javanode123](https://twitter.com/javanode123) 
+- Linkedin: [olawale-adedeko](www.linkedin.com/in/olawale-adedeko)
+- email: (adedekojoseph@gmail.com)
 
 ## Show your support
 
